@@ -1,0 +1,104 @@
+{
+  "dataset_rows": 76014,
+  "rows_removed_as_invalid": 0,
+  "unique_matches": 617,
+  "date_range": [
+    "2008-04-18",
+    "2017-05-21"
+  ],
+  "features": [
+    "bat_team",
+    "bowl_team",
+    "venue",
+    "overs_balls",
+    "runs",
+    "wickets",
+    "runs_last_5",
+    "wickets_last_5"
+  ],
+  "excluded_columns": [
+    "mid",
+    "date",
+    "batsman",
+    "bowler",
+    "striker",
+    "non-striker",
+    "total"
+  ],
+  "split_method": "Random match-level split: 70% train, 10% validation, 20% test (seed 42).",
+  "split_matches": {
+    "train": 431,
+    "validation": 62,
+    "test": 124
+  },
+  "split_rows": {
+    "train": 53167,
+    "validation": 7615,
+    "test": 15232
+  },
+  "target": "total",
+  "baseline": {
+    "description": "Training-set mean final score for every test delivery.",
+    "mae": 21.136693954467773,
+    "rmse": 27.75760269165039,
+    "r2": -0.000665004805965097
+  },
+  "neural_network": {
+    "mae": 16.04551887512207,
+    "rmse": 21.924381256103516,
+    "r2": 0.3757199953450029
+  },
+  "chronological_generalization": {
+    "split_method": "Chronological match-level: first 70% train, next 10% validation, final 20% test.",
+    "split_matches": {
+      "train": 431,
+      "validation": 62,
+      "test": 124
+    },
+    "split_date_ranges": {
+      "train": [
+        "2008-04-18",
+        "2014-05-18"
+      ],
+      "validation": [
+        "2014-05-19",
+        "2015-05-11"
+      ],
+      "test": [
+        "2015-05-12",
+        "2017-05-21"
+      ]
+    },
+    "neural_network": {
+      "mae": 36.21514129638672,
+      "rmse": 46.46537399291992,
+      "r2": -1.553706505392729
+    },
+    "training_mean_baseline": {
+      "mae": 23.0029354095459,
+      "rmse": 29.858186721801758,
+      "r2": -0.05448151646103572
+    },
+    "epochs_run": 16
+  },
+  "score_range": {
+    "method": "90th percentile of absolute residuals on the random held-out matches",
+    "absolute_residual_quantile": 34.62224731445312,
+    "nominal_level": 0.9
+  },
+  "training": {
+    "seed": 42,
+    "epochs_run": 15,
+    "best_validation_loss": 109.15774536132812,
+    "architecture": [
+      "Dense(128, relu)",
+      "Dropout(0.15)",
+      "Dense(64, relu)",
+      "Dropout(0.10)",
+      "Dense(32, relu)",
+      "Dense(1)"
+    ],
+    "loss": "Huber(delta=10)",
+    "optimizer": "Adam(learning_rate=0.001)"
+  }
+}
